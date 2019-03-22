@@ -12,8 +12,7 @@
         <script type="text/javascript">
             function formatDate(str) {
                var d = new Date(str);
-
-               document.write(d.getMonth() + " " + d.getDate() + " " + d.getFullYear());
+               document.write(d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear());
             }
         </script>
     </head>
@@ -46,10 +45,11 @@
                         <a href="image/{{ data.nasa_id }}" style="color:#66b3ff"> {{ data.title }} </a>
                     </h3>
                     <p style="color:#ffffff">{% for keywords in data["keywords"] %}| {{keywords}} {% endfor %}|</p>
-                    <!-- <script type="text/javascript">
-                        formatDate({{ data.date_created }});
-                    </script> -->
-                    <p style="color:#ffffff"> {{ data.date_created }} </p>
+                    <p style="color:#ffffff">
+                    <script type="text/javascript">
+                        formatDate("{{ data.date_created }}");
+                    </script>
+                    </p>
                     <!-- <p style="color:#d9d9d9"><small>{{ data.description }}</small></p> -->
                 </div>
                 {% endfor %}
