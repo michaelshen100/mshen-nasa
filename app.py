@@ -35,6 +35,11 @@ def image(id):
 	else:
 		return render_template("image.html", api_data=response_dict)
 
+@app.route('/history')
+def history():
+	return render_template("history.html")
+
+
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
 	

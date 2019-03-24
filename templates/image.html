@@ -11,6 +11,16 @@
                var d = new Date(str);
                document.write(d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear());
             }
+            function setHistory(id) {
+            if (!localStorage.history) {
+                var hist = [id];
+                localStorage.history = JSON.stringify(hist);
+            } else {
+                var hist = JSON.parse(localStorage.history);
+                hist.push(id);
+                localStorage.history = JSON.stringify(hist);
+            }
+      }
         </script>
     </head>
     <body style="background-color:#000000;">
@@ -42,8 +52,14 @@
                 <div class="col-7">
                         <p><img class="img-fluid" src="{{ img.href }}"></p>
                 </div>
+                <script>
+                    setHistory("{{ img.href }}")
+                </script>
                 {% endfor %}
                 {% for data in repo["data"] %}
+                <!-- <script>
+                    setHistory("{{ data.nasa_id }}")
+                </script> -->
                 <div class="col-5">
                     <font color="#ffffff">
                     <h2>{{ data.title }}</h2>
