@@ -6,21 +6,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>History</title>
     <script>
-        function getHistory() {
-            if (localStorage.history) {
-                var hist = JSON.parse(localStorage.history);
-                if (hist.length > 0) {
-                    for (var i=hist.length-1; i >= 0 ; i=i-3) {
-                    document.write("<div class='col-3'><p><img class='img-fluid' src=" + hist[i-2]+ "></p></div>");
-                    document.write("<div class='col-9'><h3><a href='image/" + hist[i-1] + "' style='color:#66b3ff'>" + hist[i-1] + "</a></h3>" + 
-                    "<p style='color:#ffffff'>Viewed at " + hist[i] + "</p></div>");
-                    
+        function getFavorites() {
+            if (localStorage.favorites) {
+                var fav = JSON.parse(localStorage.favorites);
+                if (fav.length > 0) {
+                    for (var i=fav.length-1; i >= 0 ; i=i-3) {
+                    document.write("<div class='col-3'><p><img class='img-fluid' src=" + fav[i]+ "></p></div>");
+                    document.write("<div class='col-9'><h3><a href='image/" + fav[i-2] + "' style='color:#66b3ff'>" + fav[i-1] + "</a></h3></div>");
                     }
                 } else {
-                    document.write("<div class='col-12'><h2 class='text-center' style='color:#ffffff'>No history (you have not viewed any images).</h2></div>");
+                    document.write("<h2 class='text-center' style='color:#ffffff'>No favorites (you have not favorites any images).</h2>");
                 }
             } else {
-                document.write("<div class='col-12'><h2 class='text-center' style='color:#ffffff'>No history (you have not viewed any images).</h2></div>");
+                document.write("<h2 class='text-center' style='color:#ffffff'>No favorites (you have not favorites any images).</h2>");
             }
         }
     </script>
@@ -34,18 +32,18 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/search">Search</a>
-                <a class="nav-item nav-link" href="/favorites">Favorites</a>
-                <a class="nav-item nav-link active" href="/history">History <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="/favorites">Favorites<span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/history">History</a>
                 </div>
             </div>
     </nav>
     <div class = "container">
         <div class="row">
             <div class='col-12'>
-                <h1 style='color:#ffffff'>History</h1>
+                <h1 style='color:#ffffff'>Favorites</h1>
             </div>
             <script>
-                    getHistory();
+                getFavorites();
             </script>
         </div>
     </div>

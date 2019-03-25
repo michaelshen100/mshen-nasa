@@ -12,15 +12,27 @@
                document.write(d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear());
             }
             function setHistory(id) {
-            if (!localStorage.history) {
-                var hist = [id];
-                localStorage.history = JSON.stringify(hist);
-            } else {
-                var hist = JSON.parse(localStorage.history);
-                hist.push(id);
-                localStorage.history = JSON.stringify(hist);
+                if (!localStorage.history) {
+                    var hist = [id];
+                    localStorage.history = JSON.stringify(hist);
+                } else {
+                    var hist = JSON.parse(localStorage.history);
+                    hist.push(id);
+                    localStorage.history = JSON.stringify(hist);
+                }
             }
-      }
+            function favorites(id, title, img) {
+                if (!localStorage.favorites) {
+                    var fav = [id, title, img];
+                    localStorage.favorites = JSON.stringify(fav);
+                } else {
+                    var fav = JSON.parse(localStorage.favorites);
+                    fav.push(id);
+                    fav.push(title);
+                    fav.push(img);
+                    localStorage.favorites = JSON.stringify(fav);
+                }
+            }
         </script>
     </head>
     <body style="background-color:#000000;">
@@ -55,11 +67,12 @@
                 <script>
                     setHistory("{{ img.href }}")
                 </script>
-                {% endfor %}
                 {% for data in repo["data"] %}
-                <!-- <script>
+                <script>
                     setHistory("{{ data.nasa_id }}")
-                </script> -->
+                    var d = new Date().toLocaleString();
+                    setHistory(d);
+                </script>
                 <div class="col-5">
                     <font color="#ffffff">
                     <h2>{{ data.title }}</h2>
@@ -72,10 +85,12 @@
                     <p><small>{{ data.description }}</small></p>
                     </font>
                     <div class="fb-share-button" 
-                    data-href="https://mshen-nasa-api-heroku.herokuapp.com/image/{{ data.nasa_id }}" 
-                    data-layout="button_count">
+                        data-href="https://mshen-nasa-api-heroku.herokuapp.com/image/{{ data.nasa_id }}" 
+                        data-layout="button_count">
                     </div> 
+                    <button onclick="favorites('{{ data.nasa_id }}', '{{ data.title }}', '{{ img.href }}')" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Favorite</button>
                 </div>
+                {% endfor %}
                 {% endfor %}
             </div>
             {% endfor %}

@@ -39,6 +39,9 @@ def image(id):
 def history():
 	return render_template("history.html")
 
+@app.route('/favorites')
+def favorites():
+	return render_template("favorites.html")
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0')
