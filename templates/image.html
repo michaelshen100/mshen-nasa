@@ -27,9 +27,11 @@
                     localStorage.favorites = JSON.stringify(fav);
                 } else {
                     var fav = JSON.parse(localStorage.favorites);
-                    fav.push(id);
-                    fav.push(title);
-                    fav.push(img);
+                    if (!fav.includes(id)) {
+                        fav.push(id);
+                        fav.push(title);
+                        fav.push(img);
+                    }
                     localStorage.favorites = JSON.stringify(fav);
                 }
             }
